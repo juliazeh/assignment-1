@@ -6,25 +6,26 @@ curl http://eaton-lab.org/pdsb/test.fastq.gz > test.fastq.gz
 curl http://eaton-lab.org/pdsb/iris-data-dirty.csv > iris-data-dirty.csv
 less iris-data-dirty.csv
 zless test.fastq.gz
-head iris-data-dirty.csv
 ```
-``` 
+```
+head -n 5 iris-data-dirty.csv
 5.1,3.5,1.4,0.2,Iris-setosa
 4.9,3.0,1.4,0.2,Iris-setosa
 4.7,3.2,1.3,0.2,Iris-setosa
 4.6,3.1,1.5,0.2,Iris-setosa
 5.0,3.6,1.4,0.2,Iris-setosa
-5.4,3.9,1.7,0.4,Iris-setosa
-4.6,3.4,1.4,0.3,Iris-setosa
-5.0,3.4,1.5,0.2,Iris-setosa
-4.4,2.9,1.4,0.2,Iris-setosa
-4.9,3.1,1.5,0.1,Iris-setosa
 ```
 `Head` command didn't work on `test.fastq.gz`: https://unix.stackexchange.com/questions/156261/unzipping-a-gz-file-without-removing-the-gzipped-file
 
 ```
 gunzip test.fastq.gz
-
+head -n 5 test.fastq
+@29154_superba.1 GRC13_0027_FC:4:1:12560:1179 length=74
+TGCAGGAAGGAGATTTTCGNACGTAGTGNNNNNNNNNNNNNNGCCNTGGATNNANNNGTGTGCGTGAAGAANAN
++29154_superba.1 GRC13_0027_FC:4:1:12560:1179 length=74
+IIIIIIIGIIIIIIFFFFF#EEFE<?################################################
+@29154_superba.2 GRC13_0027_FC:4:1:15976:1183 length=74
+```
 # II. Clean the data
 Use `grep`, `uniq`, `sed`. Check that all of the species names are spelled correctly in the file `iris-data-dirty.csv`. Also check for missing values stored as `NA`. Create a new file where mispelled names are replaced with the correct values, and lines with `NA` are excluded, and save it as `iris-data-clean.csv`. Use `cut`, `sort` and `uniq` to list the number of data values there are for each species in the new cleaned data file.
 
