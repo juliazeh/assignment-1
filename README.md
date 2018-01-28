@@ -28,7 +28,17 @@ IIIIIIIGIIIIIIFFFFF#EEFE<?################################################
 ```
 # II. Clean the data
 Use `grep`, `uniq`, `sed`. Check that all of the species names are spelled correctly in the file `iris-data-dirty.csv`. Also check for missing values stored as `NA`. Create a new file where mispelled names are replaced with the correct values, and lines with `NA` are excluded, and save it as `iris-data-clean.csv`. Use `cut`, `sort` and `uniq` to list the number of data values there are for each species in the new cleaned data file.
-
+```
+grep -v Iris-setosa iris-data-dirty.csv | grep -v Iris-virginica | grep -v Iris-versicolor
+sed 's/Iris-setsa/Iris-setosa/g' iris-data-dirty.csv | sed 's/Iris-versicolour/Iris-versicolor/g' | grep -v NA > iris-data-clean.csv 
+```
+ https://www.computerhope.com/unix/uuniq.htm
+ ```
+ cut -d, -f 5 iris-data-clean.csv | uniq -c
+  50 Iris-setosa
+  48 Iris-versicolor
+  50 Iris-virginica
+```
 # III. Summarize sequence data file
 Find how many lines in the data file `test.fastq.gz` start with "TGCAG" and end with "GAG"
 
