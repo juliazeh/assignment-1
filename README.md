@@ -56,6 +56,12 @@ Sources: gitter class chat, https://askubuntu.com/questions/27838/how-to-grep-2-
 mkdir sorted_reads/
 grep '^@[0-9]' test.fastq | cut -d '.' -f 1 | uniq |cut -d '_' -f 2 | uniq
 taxon=$(grep '^@[0-9]' test.fastq | cut -d '.' -f 1 | uniq |cut -d '_' -f 2 | uniq)
+cd sorted_reads/
 for i in $taxon; do touch $i.txt; done
-grep -A3 superba test.fastq 
-
+grep -A3 superba test.fastq >sorted_reads/superba.txt
+grep -A3 cyanthophylla test.fastq >sorted_reads/cyathophylla.txt
+grep -A3 cyanthophylloides test.fastq >sorted_reads/cyathophylloides.txt
+grep -A3 thamno test.fastq >sorted_reads/thamno.txt 
+grep -A3 przewalskii test.fastq >sorted_reads/przewalskii.txt
+grep -A3 rex test.fastq >sorted_reads/rex.txt
+```
