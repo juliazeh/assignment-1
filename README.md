@@ -32,7 +32,7 @@ Use `grep`, `uniq`, `sed`. Check that all of the species names are spelled corre
 grep -v Iris-setosa iris-data-dirty.csv | grep -v Iris-virginica | grep -v Iris-versicolor
 sed 's/Iris-setsa/Iris-setosa/g' iris-data-dirty.csv | sed 's/Iris-versicolour/Iris-versicolor/g' | grep -v NA > iris-data-clean.csv 
 ```
- https://www.computerhope.com/unix/uuniq.htm
+https://www.computerhope.com/unix/uuniq.htm
  ```
  cut -d, -f 5 iris-data-clean.csv | uniq -c
   50 Iris-setosa
@@ -41,12 +41,22 @@ sed 's/Iris-setsa/Iris-setosa/g' iris-data-dirty.csv | sed 's/Iris-versicolour/I
 ```
 # III. Summarize sequence data file
 Find how many lines in the data file `test.fastq.gz` start with "TGCAG" and end with "GAG"
+https://stackoverflow.com/questions/28899349/find-lines-starting-with-one-specific-character-and-ending-with-another-one
 ```
 grep -c '^TGCAG.*GAG$' test.fastq
 44
 ```
 
 # IV. Summarize sequence data file
-Write a for-loop to separate the reads from the file test.fastq.gz based on the taxon name in the label, and write the reads to separately named files in the new directory called sorted_reads/. The answer to this question will require more than a single line. See the lecture materials about using variables in for-loops. This will also be tricky because each read in the data file spans four lines (this is a standard genetic sequence file format), so for each read that you correctly identify you must grab the line with the sequence data below it, as well as the repeat label after that, and the quality information line after that. For a hint, see additional options for the grep command that can be used to select multiple lines.
+Write a `for-loop` to separate the reads from the file `test.fastq.gz` based on the taxon name in the label, and write the reads to separately named files in the new directory called `sorted_reads/`. The answer to this question will require more than a single line. See the lecture materials about using variables in for-loops. This will also be tricky because each read in the data file spans four lines (this is a standard genetic sequence file format), so for each read that you correctly identify you must grab the line with the sequence data below it, as well as the repeat label after that, and the quality information line after that. For a hint, see additional options for the `grep` command that can be used to select multiple lines.
+Sources: gitter class chat, https://askubuntu.com/questions/27838/how-to-grep-2-or-3-lines-one-containing-the-text-i-want-and-the-others-just-be
 ```
+mkdir sorted_reads/
+grep '^@[0-9]' test.fastq | cut -d '.' -f 1 | uniq |cut -d '_' -f 2 | uniq
+taxon=$(grep '^@[0-9]' test.fastq | cut -d '.' -f 1 | uniq |cut -d '_' -f 2 | uniq)
+for taxon
+> do
+> touch sorted_reads/file-$taxon.csv
+> done
+
 
